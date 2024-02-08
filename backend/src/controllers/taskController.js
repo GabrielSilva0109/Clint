@@ -28,11 +28,22 @@ export const createTask = (req, res) => {
     }
 
     const q = "INSERT INTO tasks (`name`, `status`, `completionDate`) VALUES (?,?,?);"
-
     db.query(q, [name, status, completionDate], (erro, data) => {
         if(erro) return res.status(500).json(erro)
 
         return res.status(201).json('Task created!')
+    })
+}
+
+export const updateTask = (req, res) => {
+    const taskId = req.params.id
+    const {name, status, completionDate} = req.body
+
+    const q = "UPDATE tasks SET `name`=?, `status`=?, `completionDate`=? WHERE `id`=?;"
+    db.query(q, [name, status, completionDate, taskId], (erro, data) => {
+        if(erro){ return res.status(500).json(erro) }
+
+        return res.status(200).json('Task update!')
     })
 }
 
