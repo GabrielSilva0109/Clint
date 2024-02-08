@@ -1,18 +1,16 @@
-const express = require('express')
-const Routes = require('./routes/route.js')
+import express from 'express'
+import routes from './routes/route.js'
 
-const app = express()
-const port = 3001
+const app = express();
+app.use(express.json());
 
-app.use(express.json())
+const port = 3001;
+app.use('/tasks', routes);
 
-//Rota
-app.get('/', (req, res) => {
-    res.send("Servidor On!")
-})
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
 
-app.use('/', Routes)
-
-app.listen(port , () =>{
-    console.log(`Servidor rodando na porta ${port}`)
-})
+app.on('error', (err) => {
+    console.error('Erro no servidor:', err);
+});
