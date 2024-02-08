@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 const port = 3001;
-app.use('/tasks', routes);
+app.use('/', routes);
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
