@@ -1,6 +1,6 @@
 import React from "react"
-import styled from 'style-components'
 import { Draggable } from "react-beautiful-dnd"
+import styled from 'styled-components';
 
 const Container = styled.div`
     border-radius: 8px;
@@ -8,11 +8,11 @@ const Container = styled.div`
     color: black;
     margin: 0px 10px 8px 10px;
     min-height: 90px;
-    background: red;
+    background: ${props => bgColorChange(props)};
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    flex-direction column;
+    flex-direction: column;
     `
 
 const TextContent = styled.div `
@@ -31,8 +31,28 @@ function bgColorChange(props) {
         ? "#F2D7D5" : "#fffada"
 }
 
-export default function Tasks () {
+export default function Tasks ({task, index}) {
     return (
-        <div>Tasks</div>
+    <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
+        {(provided , snapshot) => (
+            <Container {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+                isDragging={snapshot.isDragging}>
+                <div style={{display: "flex", justifyContent: "start", padding: 2}}>
+                    <span>
+                        <small>
+                            #{task.id}{""}
+                        </small>
+                    </span>
+                </div>
+                <div style={{display: "flex", justifyContent: "center", padding: 2}}>
+                    <TextContent>{task.name}</TextContent>
+                </div>
+                <IdTask>{task.id}</IdTask>
+                {provided.placeholder}
+            </Container>
+        )}
+    </Draggable>
     )
 }
