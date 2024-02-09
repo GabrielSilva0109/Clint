@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     testEnvironment: 'node',
     transform: {
       '^.+\\.tsx?$': 'ts-jest',
@@ -7,6 +7,7 @@ module.exports = {
     globals: {
       'ts-jest': {
         tsconfig: 'tsconfig.json',
+        isolatedModules: true,
       },
     },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',

@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config jest.config.mjs",
     "start": "node src/app.js"
   },
   "keywords": [],
