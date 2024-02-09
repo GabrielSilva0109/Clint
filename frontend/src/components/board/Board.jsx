@@ -1,94 +1,88 @@
-import React, { useEffect, useState } from 'react'
-import { DragDropContext } from 'react-beautiful-dnd'
-import ColumnTask from '../column/ColumnTask'
-import { fetchTasks } from "../../services/GetTasks"
+import React, { useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
+import ColumnTask from '../column/ColumnTask';
+import { fetchTasks } from '../../services/GetTasks';
 
 export default function Board() {
-    const [toDo, setToDo] = useState([]);
-    const [doing, setDoing] = useState([]);
-    const [ready, setReady] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async ()=>{
-            try{
-                const tasks = await fetchTasks()
-                const todoTask = tasks.filter((task) => task.status === "To Do")
-                const doingTask = tasks.filter((task) => task.status === "Doing")
-                const readyTask = tasks.filter((task) => task.status === "Ready")
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedTasks = await fetchTasks();
+        setTasks(fetchedTasks);
+      } catch (error) {
+        console.log('Error: GET BOARD', error);
+      }
+    };
 
-                setToDo(todoTask)
-                setDoing(doingTask)
-                setReady(readyTask)
-            } catch (erro) {
-                console.log("Erro: GET BOARD", erro)
-            }
-        }
+    fetchData();
+  }, []);
 
-        fetchData()
-    }, [])
+  const handleDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
 
-    const handleDragEnd = (result) => {
-        const { destination, source, draggableId } = result;
-    
-        if (!destination || source.droppableId === destination.droppableId) return;
-    
-        deletePreviousState(source.droppableId, draggableId);
-    
-        const task = findItemById(draggableId, [...toDo, ...doing, ...ready]);
-    
-        setNewState(destination.droppableId, task);
+    if (!destination || source.droppableId === destination.droppableId) return;
+
+    const updatedTasks = [...tasks];
+    const taskIndex = updatedTasks.findIndex((task) => task.id === draggableId);
+    const movedTask = updatedTasks.splice(taskIndex, 1)[0];
+
+    movedTask.status = getColumnStatus(destination.droppableId);
+    updatedTasks.splice(findInsertIndex(destination.index, updatedTasks), 0, movedTask);
+
+    setTasks(updatedTasks);
+  };
+
+  const deleteTask = async (taskId) => {
+    try {
+      const response = await fetch(`http://localhost:3333/task/${taskId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete task');
       }
 
-    function deletePreviousState(sourceDroppableId, taskId) {
-        switch (sourceDroppableId) {
-          case "1":
-            setToDo(removeItemById(taskId, toDo))
-            break;
-          case "2":
-            setDoing(removeItemById(taskId, doing))
-            break;
-          case "3":
-            setReady(removeItemById(taskId, ready))
-            break;
-            default:
-                console.log("Erro")
-        }
-    }
-    
-    function setNewState(destinationDroppableId, task) {
-        let updatedTask;
-        switch (destinationDroppableId) {
-          case "1": // TO DO
-            updatedTask = { ...task, status: "To Do" };
-            setToDo([updatedTask, ...toDo]);
-            break;
-          case "2": // DOING
-            updatedTask = { ...task, status: "Doing" };
-            setDoing([updatedTask, ...doing]);
-            break;
-          case "3": // READY
-            updatedTask = { ...task, status: "Ready" };
-            setReady([updatedTask, ...ready]);
-            break;
-        }
-    }
-    
-    function findItemById(id, array) {
-        return array.find((item) => item.id == id);
-    }
-    
-    function removeItemById(id, array) {
-        return array.filter((item) => item.id != id);
-    }
+      const updatedTasks = tasks.filter((task) => task.id !== taskId);
+      setTasks(updatedTasks);
 
-    return (
-        <DragDropContext onDragEnd={handleDragEnd}>
-            <h1 style={{textAlign:'center'}}>Clint Kanban</h1>
-            <div style={{display: 'flex', justifyContent: 'center', gap:'20px', alignItems: 'center', flexDirection: 'row'}}>
-                <ColumnTask name={'To Do'} tasks={toDo} id={'1'}/>
-                <ColumnTask name={'Doing'} tasks={doing} id={'2'}/>
-                <ColumnTask name={'Ready'} tasks={ready} id={'3'}/>
-            </div>
-        </DragDropContext>
-    )
+      console.log('Task Deleted!');
+    } catch (error) {
+      console.log('Error on delete', error);
+    }
+  };
+
+  const getColumnStatus = (droppableId) => {
+    switch (droppableId) {
+      case '1':
+        return 'To Do';
+      case '2':
+        return 'Doing';
+      case '3':
+        return 'Ready';
+      default:
+        return '';
+    }
+  };
+
+  const findInsertIndex = (destinationIndex, tasksArray) => {
+    if (destinationIndex === 0) return 0;
+    if (destinationIndex >= tasksArray.length) return tasksArray.length;
+    return destinationIndex;
+  };
+
+  return (
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <h1 style={{ textAlign: 'center' }}>Clint Kanban</h1>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', flexDirection: 'row' }}>
+        <ColumnTask name={'To Do'} tasks={tasks.filter((task) => task.status === 'To Do')} id={'1'} onDeleteTask={deleteTask} />
+        <ColumnTask name={'Doing'} tasks={tasks.filter((task) => task.status === 'Doing')} id={'2'} onDeleteTask={deleteTask} />
+        <ColumnTask name={'Ready'} tasks={tasks.filter((task) => task.status === 'Ready')} id={'3'} onDeleteTask={deleteTask} />
+      </div>
+    </DragDropContext>
+  );
 }

@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import { toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 
 export default function CreateTask (){
     const [taskName, setTaskName] = useState("")
@@ -9,31 +7,35 @@ export default function CreateTask (){
 
     const handleInputChange = (e) =>{
         setTaskName(e.target.value)
-        setTaskStatus("Doing")
+        setTaskStatus("To Do")
         setTaskDate("2021-01-10")
     }
 
-    const handleCreateTask = () => {
-        fetch("http://localhost:3333/task", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: taskName,
-                status: taskStatus,
-                completionData: taskDate
+    const handleCreateTask = async () => {
+        try{
+            const response = await fetch("http://localhost:3333/task", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: taskName,
+                    status: taskStatus,
+                    completionData: taskDate
+                })
             })
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Task Created!!", data)
-            setTaskName("")
-        })
-        .catch((error) => {
-            console.log("Error: ", error)
-        })
-    }
+            if(!response.ok){
+                throw new Error("Failed to Create Task!")
+            }
+            const data = await response.json()
+    
+            console.log("Task Created!!", data);
+            setTaskName("");
+            } catch (erro) {
+                console.log("Error: CREATE TASK: ", erro)
+            }
+}
+
 
     return (
         <div>
@@ -45,4 +47,5 @@ export default function CreateTask (){
             <button onClick={handleCreateTask}>Create</button>
         </div>
     )
-} 
+
+}

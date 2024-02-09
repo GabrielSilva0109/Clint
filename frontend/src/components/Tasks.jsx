@@ -21,15 +21,17 @@ const IdTask = styled.div`
     display: flex;
     justify-content: end;
     padding: 2px;
+    font-size: 0.875rem; 
+     
 `
 //Função para estilizar o arrasto das Tasks
 function bgColorChange(props) {
-    return props.isDragging ? "lightgreen" : props.isDraggale ?
+    return props.isDragging ? "lightgreen" : props.isDraggable ?
         props.isBacklog ? "#F2D7D5" : "#DCDCDC" : props.isBacklog 
         ? "#F2D7D5" : "#fffada"
 }
 
-export default function Tasks ({task, index}) {
+export default function Tasks ({task, index, onDeleteTask}) {
     return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
         {(provided , snapshot) => (
@@ -47,7 +49,10 @@ export default function Tasks ({task, index}) {
                 <div style={{display: "flex", justifyContent: "center", padding: 2}}>
                     <TextContent>{task.name}</TextContent>
                 </div>
-                <IdTask>{task.id}</IdTask>
+                <IdTask>{task.completionDate}</IdTask>
+                <div style={{ display: "flex", justifyContent: "end", padding: 2 }}>
+                    <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+                </div>
                 {provided.placeholder}
             </Container>
         )}
