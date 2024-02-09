@@ -8,7 +8,7 @@ export default function Board() {
     const [ready, setReady] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3001/tasks")
+        fetch("http://localhost:3333/tasks")
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.status}`);
@@ -51,6 +51,7 @@ export default function Board() {
           case "3":
             setReady(removeItemById(taskId, ready));
             break;
+            default
         }
     }
     
@@ -83,7 +84,7 @@ export default function Board() {
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <h1 style={{textAlign:'center'}}>Clint Kanban</h1>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
+            <div style={{display: 'flex', justifyContent: 'center', gap:'20px', alignItems: 'center', flexDirection: 'row'}}>
                 <ColumnTask name={'To Do'} tasks={toDo} id={'1'}/>
                 <ColumnTask name={'Doing'} tasks={doing} id={'2'}/>
                 <ColumnTask name={'Ready'} tasks={ready} id={'3'}/>

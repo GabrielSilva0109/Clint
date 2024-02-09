@@ -14,11 +14,9 @@ const Container = styled.div`
     justify-content: space-between;
     flex-direction: column;
     `
-
 const TextContent = styled.div `
     
 `
-
 const IdTask = styled.div`
     display: flex;
     justify-content: end;

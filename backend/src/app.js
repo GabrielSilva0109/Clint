@@ -5,7 +5,9 @@ import cors from 'cors'
 const app = express();
 app.use(express.json());
 
-const port = 3001;
+app.use(cors())
+
+const port = 3333;
 app.use('/', routes);
 
 app.listen(port, () => {
