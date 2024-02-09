@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { toast,  ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 export default function CreateTask (){
@@ -27,19 +27,11 @@ export default function CreateTask (){
         })
         .then((response) => response.json())
         .then((data) => {
-            //console.log("Task Created!!", data)
-            toast.success("Task created successfully!", {
-                position: toast.POSITION.TOP_RIGHT,
-            });
-            
+            console.log("Task Created!!", data)
             setTaskName("")
         })
         .catch((error) => {
             console.log("Error: ", error)
-
-            toast.error("Error creating task!", {
-                position: toast.POSITION.TOP_RIGHT,
-              })
         })
     }
 
@@ -53,4 +45,4 @@ export default function CreateTask (){
             <button onClick={handleCreateTask}>Create</button>
         </div>
     )
-}
+} 
