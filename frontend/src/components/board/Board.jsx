@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import ColumnTask from '../column/ColumnTask'
+import { fetchTasks } from "../../services/GetTasks"
 
 export default function Board() {
     const [toDo, setToDo] = useState([]);
@@ -8,24 +9,22 @@ export default function Board() {
     const [ready, setReady] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3333/tasks")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.status}`);
+        const fetchData = async ()=>{
+            try{
+                const tasks = await fetchTasks()
+                const todoTask = tasks.filter((task) => task.status === "To Do")
+                const doingTask = tasks.filter((task) => task.status === "Doing")
+                const readyTask = tasks.filter((task) => task.status === "Ready")
+
+                setToDo(todoTask)
+                setDoing(doingTask)
+                setReady(readyTask)
+            } catch (erro) {
+                console.log("Erro: GET BOARD", erro)
             }
-            return response.json();
-        })
-        .then((tasks) => {
-            const todoTask = tasks.filter((task) => tasks.status === "To Do")
-            const doingTask = tasks.filter((task) => tasks.status === "Doing")
-            const readyTask = tasks.filter((task) => tasks.status === "Ready")
-        
-            setToDo(todoTask)
-            setDoing(doingTask)
-            setReady(readyTask)
-        }).catch((error) =>{
-            console.error("Erro: ", error)
-        })
+        }
+
+        fetchData()
     }, [])
 
     const handleDragEnd = (result) => {

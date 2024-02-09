@@ -9,7 +9,7 @@ export default function CreateTask (){
 
     const handleInputChange = (e) =>{
         setTaskName(e.target.value)
-        setTaskStatus("To Do")
+        setTaskStatus("Doing")
         setTaskDate("2021-01-10")
     }
 
