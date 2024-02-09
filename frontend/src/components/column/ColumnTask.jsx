@@ -2,7 +2,7 @@ import React from "react"
 import { Droppable} from 'react-beautiful-dnd'
 import styled from "styled-components"
 import "./style.css"
-import Tasks from "./Tasks"
+import Tasks from "../Tasks"
 
 const Container = styled.div`
     background: #9DA58E;
@@ -17,7 +17,6 @@ const Title = styled.h2`
     padding: 8px;
     text-align: center;
     font-size: 2.2rem;
-    
 `
 const TaskList = styled.div`
     padding: 3px;

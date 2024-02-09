@@ -1,14 +1,15 @@
-import Board from "./components/Board";
-import Tasks from "./components/Tasks";
-import Column from "./components/ColumnTask";
-import { useState } from "react";
-import CreateTask from "./components/CreateTask";
+import Board from "./components/board/Board";
+import CreateTask from "./components/create/CreateTask";
+import { toast,  ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
     <div className="App">
       <CreateTask />
       <Board/>
+      <ToastContainer />
     </div>
     
   );

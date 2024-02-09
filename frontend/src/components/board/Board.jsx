@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
-import ColumnTask from './ColumnTask'
+import ColumnTask from '../column/ColumnTask'
 
 export default function Board() {
     const [toDo, setToDo] = useState([]);
@@ -43,15 +43,16 @@ export default function Board() {
     function deletePreviousState(sourceDroppableId, taskId) {
         switch (sourceDroppableId) {
           case "1":
-            setToDo(removeItemById(taskId, toDo));
+            setToDo(removeItemById(taskId, toDo))
             break;
           case "2":
-            setDoing(removeItemById(taskId, doing));
+            setDoing(removeItemById(taskId, doing))
             break;
           case "3":
-            setReady(removeItemById(taskId, ready));
+            setReady(removeItemById(taskId, ready))
             break;
-            default
+            default:
+                console.log("Erro")
         }
     }
     
