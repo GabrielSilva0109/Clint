@@ -5,7 +5,9 @@ function App() {
   
   return (
     <div className="App">
-      <CreateTask />
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <CreateTask />
+      </div>
       <Board />
     </div>
   );

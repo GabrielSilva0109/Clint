@@ -2,6 +2,7 @@ import React from "react"
 import { Draggable } from "react-beautiful-dnd"
 import styled from 'styled-components';
 
+
 const Container = styled.div`
     border-radius: 8px;
     padding: 8px;
@@ -13,16 +14,33 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    font-family: 'Arial', sans-serif;
     `
 const TextContent = styled.div `
-    
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+`
+const DeleteButton = styled.div `
+    background-color: #ff4646; 
+    color: #fff;
+    border: none; 
+    padding: 4px; 
+    cursor: pointer;
+    font-family: 'Arial', sans-serif; 
+    transition: background-color 0.3s;
+    border-radius: 6px;
+
+    &:hover {
+        background-color: #e02020; 
+}
 `
 const IdTask = styled.div`
     display: flex;
     justify-content: end;
     padding: 2px;
-    font-size: 0.875rem; 
-     
+    font-size: 0.875rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;   
 `
 //Função para estilizar o arrasto das Tasks
 function bgColorChange(props) {
@@ -32,6 +50,12 @@ function bgColorChange(props) {
 }
 
 export default function Tasks ({task, index, onDeleteTask}) {
+    const formattedDate = new Intl.DateTimeFormat('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    }).format(new Date(task.completionDate))
+
     return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
         {(provided , snapshot) => (
@@ -49,9 +73,10 @@ export default function Tasks ({task, index, onDeleteTask}) {
                 <div style={{display: "flex", justifyContent: "center", padding: 2}}>
                     <TextContent>{task.name}</TextContent>
                 </div>
-                <IdTask>{task.completionDate}</IdTask>
-                <div style={{ display: "flex", justifyContent: "end", padding: 2 }}>
-                    <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+                
+                <div style={{ display: "flex", justifyContent: "space-between", padding: 2 }}>
+                <IdTask>{formattedDate}</IdTask>
+                    <DeleteButton onClick={() => onDeleteTask(task.id)}>Delete</DeleteButton>
                 </div>
                 {provided.placeholder}
             </Container>
