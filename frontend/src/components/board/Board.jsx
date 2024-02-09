@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
-import ColumnTask from '../column/ColumnTask';
-import { fetchTasks } from '../../services/GetTasks';
-import { format } from 'date-fns';
-import CreateTask from '../../services/CreateTask';
+import React, { useEffect, useState } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
+import ColumnTask from '../column/ColumnTask'
+import { fetchTasks } from '../../services/GetTasks'
+import CreateTask from '../../services/CreateTask'
 
 export default function Board() {
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedTasks = await fetchTasks();
-        setTasks(fetchedTasks);
+        const fetchedTasks = await fetchTasks()
+        setTasks(fetchedTasks)
       } catch (error) {
-        console.log('Error: GET BOARD', error);
+        console.log('Error: GET BOARD', error)
       }
-    };
+    }
 
     fetchData()
     const intervalId = setInterval(() => fetchData(), 100)
@@ -112,6 +111,5 @@ export default function Board() {
             </div>
         </DragDropContext>
     </div>
-    
   );
 }
