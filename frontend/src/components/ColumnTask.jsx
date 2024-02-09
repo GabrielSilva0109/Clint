@@ -2,6 +2,7 @@ import React from "react"
 import { Droppable} from 'react-beautiful-dnd'
 import styled from "styled-components"
 import "./style.css"
+import Tasks from "./Tasks"
 
 const Container = styled.div`
     background: #9DA58E;
@@ -18,15 +19,13 @@ const Title = styled.h2`
     font-size: 2.2rem;
     
 `
-
 const TaskList = styled.div`
     padding: 3px;
-    transistion: background-color 0.2s ease;
+    transition: background-color 0.2s ease;
     background: #9DA58E;
     flex-grow: 1;
     min-height: 100px; 
 `
-
 
 export default function Column({id, tasks, name}) {
     return (
@@ -34,15 +33,19 @@ export default function Column({id, tasks, name}) {
             <Title>{name}</Title>
 
             <Droppable droppableId={id}>
-                {(provided, snapshot) => {
+                {(provided, snapshot) => (
                     <TaskList 
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                         isDragginOver={snapshot.isDraggingOver}
                     >
+                        {tasks.map((task, index) =>(
+                            <Tasks key={index} index={index} task={task} />
+                        ))}
+
                         {provided.placeholder}
                     </TaskList>
-                }}
+                )}
             </Droppable>
         </Container>
     )

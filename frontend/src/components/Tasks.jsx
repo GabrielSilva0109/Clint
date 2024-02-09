@@ -16,7 +16,7 @@ const Container = styled.div`
     `
 
 const TextContent = styled.div `
-
+    
 `
 
 const IdTask = styled.div`
@@ -42,7 +42,7 @@ export default function Tasks ({task, index}) {
                 <div style={{display: "flex", justifyContent: "start", padding: 2}}>
                     <span>
                         <small>
-                            #{task.id}{""}
+                            #{task.id}{" "}
                         </small>
                     </span>
                 </div>
