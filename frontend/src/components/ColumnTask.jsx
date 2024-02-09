@@ -1,20 +1,22 @@
 import React from "react"
 import { Droppable} from 'react-beautiful-dnd'
 import styled from "styled-components"
+import "./style.css"
 
 const Container = styled.div`
     background: #9DA58E;
     border-radius: 5px;
     width: 300px;
-    height: 500px
+    height: 500px;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    border: 1px solid black;
 `
 const Title = styled.h2`
     padding: 8px;
     text-align: center;
+    font-size: 2.2rem;
+    
 `
 
 const TaskList = styled.div`
@@ -28,7 +30,7 @@ const TaskList = styled.div`
 
 export default function Column({id, tasks, name}) {
     return (
-        <Container>
+        <Container className="column">
             <Title>{name}</Title>
 
             <Droppable droppableId={id}>
