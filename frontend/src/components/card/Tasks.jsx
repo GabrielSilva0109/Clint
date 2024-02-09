@@ -2,9 +2,8 @@ import React from "react"
 import { Draggable } from "react-beautiful-dnd"
 import styled from 'styled-components';
 
-
 const Container = styled.div`
-    border-radius: 8px;
+    border-radius: 16px;
     padding: 8px;
     color: black;
     margin: 0px 10px 8px 10px;
@@ -14,10 +13,10 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     `
 const TextContent = styled.div `
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
 `
 const DeleteButton = styled.div `
@@ -26,7 +25,7 @@ const DeleteButton = styled.div `
     border: none; 
     padding: 4px; 
     cursor: pointer;
-    font-family: 'Arial', sans-serif; 
+    font-family: 'Poppins', sans-serif; 
     transition: background-color 0.3s;
     border-radius: 6px;
 
@@ -39,7 +38,7 @@ const IdTask = styled.div`
     justify-content: end;
     padding: 2px;
     font-size: 0.875rem;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;   
 `
 //Função para estilizar o arrasto das Tasks
@@ -50,6 +49,7 @@ function bgColorChange(props) {
 }
 
 export default function Tasks ({task, index, onDeleteTask}) {
+    //Formart Data
     const formattedDate = new Intl.DateTimeFormat('en-US', { 
         year: 'numeric', 
         month: 'long', 

@@ -1,13 +1,10 @@
 import Board from "./components/board/Board";
 import CreateTask from "./services/CreateTask"
-
 function App() { 
   
   return (
-    <div className="App">
-      <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <CreateTask />
-      </div>
+    <div style={{margin: "0", padding: "0", background: "#FAFCFC"}}>
+      <CreateTask />
       <Board />
     </div>
   );

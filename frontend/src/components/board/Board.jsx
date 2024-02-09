@@ -20,6 +20,9 @@ export default function Board() {
     };
 
     fetchData()
+    const intervalId = setInterval(() => fetchData(), 100)
+
+    return () => clearInterval(intervalId)
   }, [])
 
   const handleDragEnd = async (result) => {
