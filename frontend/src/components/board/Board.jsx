@@ -158,15 +158,15 @@
             const formattedStartDate = startDate.split('T')[0]
             const formattedEndDate = endDate.split('T')[0]
 
+            await new Promise(resolve => setTimeout(resolve, 0))
+            
             const allTasks = await fetchTasks()
 
             const filteredTasks = allTasks.filter((task) => {
-                const taskDate = new Date(task.completionDate).toISOString().split('T')[0];
-                return taskDate >= formattedStartDate && taskDate <= formattedEndDate;
+                const taskDate = new Date(task.completionDate).toISOString().split('T')[0]
+                return taskDate >= formattedStartDate && taskDate <= formattedEndDate
             })
 
-        
-            console.log(filteredTasks)
             setTasks(filteredTasks)
             setValidDates(true)
             setValidate(false)
