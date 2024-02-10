@@ -30,7 +30,7 @@ const Input = styled.input`
   }
 `
 const CreateButton = styled.button`
-width: 100px;
+  width: 100px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 14px 20px;
