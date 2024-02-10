@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Tasks from "../card/Tasks"
 
 const Container = styled.div`
-    background: #2f4d4a;
+    background: #bebebe;
     border-radius: 12px;
     width: 300px;
     height: 500px;
@@ -13,23 +13,21 @@ const Container = styled.div`
     scrollbar-width: none;
 `
 const Title = styled.h2`
-    padding: 8px;
     text-align: center;
     font-size: 2.2rem;
-    color: white;
+    color: black;
     font-family: 'Poppins', sans-serif;
 `
 const TaskList = styled.div`
-    padding: 3px;
     transition: background-color 0.2s ease;
-    background: #2f4d4a;
+    background: #bebebe;
     flex-grow: 1;
     min-height: 100px;
 `
 
 export default function Column({id, tasks, name, onDeleteTask}) {
     return (
-        <Container className="column">
+        <Container >
             <Title>{name}</Title>
             <Droppable droppableId={id}>
                 {(provided, snapshot) => (

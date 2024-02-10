@@ -18,7 +18,7 @@ const InputContainer = styled.label`
 `
 const Input = styled.input`
   padding: 10px;
-  margin: 5px 0;
+  margin: 5px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -47,7 +47,6 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 2rem;
 `
-
 export default function CreateTask() {
   const [taskName, setTaskName] = useState("")
   const [taskStatus, setTaskStatus] = useState("")
@@ -86,13 +85,16 @@ export default function CreateTask() {
 
   return (
     <StyledCreateTask>
-      <Title>Create Task</Title>
+      <div>
+      <Title>Organize your tasks with <span style={{color:"#7c30ff"}}>Clint</span></Title>
+      </div>
+      
       <InputContainer>
-        Task:
+        Task 
         <Input type="text" value={taskName} onChange={handleInputChange} />
       </InputContainer>
       <InputContainer>
-        Date:
+        Date 
         <Input
           type="date"
           value={taskDate}
