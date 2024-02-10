@@ -8,24 +8,18 @@ Este projeto é um aplicativo simples de Kanban desenvolvido com ReactJS para o 
 
 1. **Clone este repositório:**
 ```
-
 git clone https://github.com/GabrielSilva0109/Clint.git
-
 ``` 
 2. **Navegue para o diretório do frontend:**
 
 ```
-
 cd frontend
-
 ``` 
 
 3. *Instale as dependências do frontend:*
 
 ```
-
 npm install react styled-components react-beautiful-dnd
-
 ``` 
 
 4. *Navegue para o diretório do backend:*
