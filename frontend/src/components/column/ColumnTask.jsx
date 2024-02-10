@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Tasks from "../card/Tasks"
 
 const Container = styled.div`
-    background: #bebebe;
+    background: #154bcf;
     border-radius: 12px;
     width: 300px;
     height: 500px;
@@ -15,12 +15,12 @@ const Container = styled.div`
 const Title = styled.h2`
     text-align: center;
     font-size: 2.2rem;
-    color: black;
+    color: white;
     font-family: 'Poppins', sans-serif;
 `
 const TaskList = styled.div`
     transition: background-color 0.2s ease;
-    background: #bebebe;
+    background: #154bcf;
     flex-grow: 1;
     min-height: 100px;
 `

@@ -57,6 +57,7 @@ export default function Board() {
     const fetchData = async () => {
       try {
         const fetchedTasks = await fetchTasks()
+        
         setTasks(fetchedTasks)
       } catch (error) {
         console.log('Error: GET BOARD', error)
@@ -68,7 +69,6 @@ export default function Board() {
 
     return () => clearInterval(intervalId)
   }, [startDate, endDate])
-
 
   const handleDragEnd = async (result) => {
     const { destination, source, draggableId } = result
