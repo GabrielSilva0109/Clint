@@ -1,9 +1,9 @@
-    import React, { useEffect, useState } from 'react'
-    import { DragDropContext } from 'react-beautiful-dnd'
-    import ColumnTask from '../column/ColumnTask'
-    import { fetchTasks } from '../../services/GetTasks'
-    import CreateTask from '../../services/CreateTask'
-    import styled from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
+import ColumnTask from '../column/ColumnTask'
+import { fetchTasks } from '../../services/GetTasks'
+import CreateTask from '../../services/CreateTask'
+import styled from 'styled-components'
 
     const Button = styled.button`
     width: 100px;
@@ -159,7 +159,7 @@
             const formattedEndDate = endDate.split('T')[0]
 
             await new Promise(resolve => setTimeout(resolve, 0))
-            
+
             const allTasks = await fetchTasks()
 
             const filteredTasks = allTasks.filter((task) => {
