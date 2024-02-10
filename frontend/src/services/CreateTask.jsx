@@ -30,6 +30,7 @@ const Input = styled.input`
   }
 `
 const CreateButton = styled.button`
+width: 100px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 14px 20px;
@@ -45,7 +46,11 @@ const CreateButton = styled.button`
 const Title = styled.h1`
   color: #061816;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 2.7rem;
+  background: white;
+  height: 50px;
+  margin: 0px;
+  margin-bottom: 10px;
 `
 export default function CreateTask() {
   const [taskName, setTaskName] = useState("")

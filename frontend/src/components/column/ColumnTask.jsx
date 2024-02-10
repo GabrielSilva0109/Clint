@@ -4,23 +4,27 @@ import styled from "styled-components"
 import Tasks from "../card/Tasks"
 
 const Container = styled.div`
-    background: #154bcf;
-    border-radius: 12px;
-    width: 300px;
-    height: 500px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+        background: #2a9aec;
+        border-radius: 12px;
+        width: 300px;
+        height: 500px;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        border: 3px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 `
 const Title = styled.h2`
     text-align: center;
     font-size: 2.2rem;
-    color: white;
+    color: black;
     font-family: 'Poppins', sans-serif;
+    border-bottom: 3px solid black;
+    margin: 10px;
 `
 const TaskList = styled.div`
     transition: background-color 0.2s ease;
-    background: #154bcf;
+    background: #2a9aec;
     flex-grow: 1;
     min-height: 100px;
 `

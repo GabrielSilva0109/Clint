@@ -14,6 +14,11 @@ const Container = styled.div`
     justify-content: space-between;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
+    transition: 1s;
+    border: 3px solid;
+    &:hover {
+        transform: scale(1.07);
+    }
     `
 const TextContent = styled.div `
     font-family: 'Poppins', sans-serif;
