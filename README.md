@@ -31,6 +31,17 @@ cd backend
 5. *Instale as dependências do backend:*
 ```
 npm install 
+```
+
+6. *Crie a table no MySQL*
+```
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    status VARCHAR(50),
+    completionDate DATE
+);
+
 ``` 
 
 ## Estrutura do Projeto
